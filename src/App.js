@@ -7,6 +7,7 @@ function App() {
   let [like, setLike] = useState([0, 0, 0])
   let [modal, setModal] = useState(false)
   let [modalTitle, setModalTitle] = useState(0)
+  let addTitle
 
   return (
     <div className="App">
@@ -44,21 +45,41 @@ function App() {
       {
         title.map((data, i) => {
           return (
-            <div className="list" key={i} onClick={() => { setModal(!modal); setModalTitle(i) }}>
+            <div className="list" key={i} onClick={(e) => {
+              setModal(!modal)
+              setModalTitle(i)
+            }}>
               <h4>{data}<span onClick={(e) => {
                 e.stopPropagation()
                 let copy = [...like]
                 copy[i] = copy[i] + 1
                 setLike(copy)
-              }}>❤️</span>{like[i]}</h4>
+              }}>❤️</span>{like[i]}
+                <button onClick={(e) => {
+                  e.stopPropagation()
+                  let copy = [...title]
+                  copy.splice(i, 1)
+                  setTitle(copy)
+                }}>x</button>
+              </h4>
               <p>2월 17일 발행</p>
             </div>
           )
         })
       }
 
+      <input id="add-title" onChange={(e) => {
+        addTitle = e.target.value
+      }} />
+      <button onClick={(e) => {
+        let copy = [...title]
+        copy.push(addTitle)
+        setTitle(copy)
+        document.querySelector('#add-title').value = ""
+      }}>+</button>
+
       {
-        modal === true ? <Modal modalTitle={modalTitle} setTitle={setTitle} title={title}/> : null
+        modal === true ? <Modal modalTitle={modalTitle} setTitle={setTitle} title={title} /> : null
       }
 
     </div>
