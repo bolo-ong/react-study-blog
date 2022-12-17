@@ -1,0 +1,13 @@
+{
+    "css.styleSheets": [
+        "html",
+        "javascriptreact",
+        "typescriptreact",
+        "typescript",
+        "javascript",
+        "njk",
+        "nunjucks",
+        "html-nunjucks",
+        "php"
+    ]
+}
