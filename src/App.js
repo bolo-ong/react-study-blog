@@ -7,6 +7,7 @@ function App() {
   let [like, setLike] = useState([0, 0, 0])
   let [modal, setModal] = useState(false)
   let [modalTitle, setModalTitle] = useState(0)
+  let [date, setDate] = useState(['2022. 12. 19.', '2022. 12. 19.', '2022. 12. 19.'])
   let addTitle
 
   return (
@@ -62,7 +63,7 @@ function App() {
                   setTitle(copy)
                 }}>x</button>
               </h4>
-              <p>2월 17일 발행</p>
+              <p>{date[i]}</p>
             </div>
           )
         })
@@ -72,9 +73,22 @@ function App() {
         addTitle = e.target.value
       }} />
       <button onClick={(e) => {
-        let copy = [...title]
-        copy.push(addTitle)
-        setTitle(copy)
+        if (addTitle === undefined) {
+          return
+        }
+        else {
+          let copyTitle = [...title]
+          copyTitle.unshift(addTitle)
+          setTitle(copyTitle)
+
+          let copyLike = [...like]
+          copyLike.unshift(0)
+          setLike(copyLike)
+
+          let copyDate = [...date]
+          copyDate.unshift(new Date().toLocaleDateString())
+          setDate(copyDate)
+        }
         document.querySelector('#add-title').value = ""
       }}>+</button>
 
